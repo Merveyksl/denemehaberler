@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1093730760463",
+    "project_id": "haber-de142",
+    "storage_bucket": "haber-de142.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1093730760463:android:08e246a46c7537f4e6307a",
+        "android_client_info": {
+          "package_name": "com.merve.haber"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1093730760463-btlcjqk80dhr8ul9qdfahusklujfk7nq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB6r-OVQIL9srLccMDT6hNOG3bnsfYdklo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1093730760463-btlcjqk80dhr8ul9qdfahusklujfk7nq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
