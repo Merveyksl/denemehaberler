@@ -1,4 +1,6 @@
+import 'package:denemehaberler/alert/dialogAlert.dart';
 import 'package:denemehaberler/hakk%C4%B1nda/hakk%C4%B1nda.dart';
+import 'package:flutter/services.dart';
 import 'package:http/http.dart';
 
 import 'package:cached_network_image/cached_network_image.dart';
@@ -11,6 +13,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'category_news.dart';
+import 'package:flutter/material.dart';
+import 'package:firebase_core/firebase_core.dart';
+
+
 class Home extends StatefulWidget {
   @override
   _HomeState createState() => _HomeState();
@@ -38,9 +44,96 @@ class _HomeState extends State<Home> {
     });
 
   }
+
+
+  showAlertDialog(BuildContext context) {
+
+    Widget okButton = FlatButton(
+      child: Text("EVET"),
+      onPressed: () {
+        SystemNavigator.pop();
+      },
+    );
+    Widget noButton = FlatButton(
+      child: Text("HAYIR"),
+      onPressed: () {
+        Navigator.of(context).pop();
+      },
+    );
+
+    // Create AlertDialog
+    AlertDialog alert = AlertDialog(
+      title: Text("ÇIKIŞ"),
+      content: Text("Çıkış yapmak istediğinize emin misiniz?"),
+      actions: [
+        okButton,
+        noButton
+      ],
+    );
+
+    // show the dialog
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return alert;
+      },
+    );
+
+  }
+
+
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
+      drawer: Drawer(
+        // Add a ListView to the drawer. This ensures the user can scroll
+        // through the options in the drawer if there isn't enough vertical
+        // space to fit everything.
+        child: ListView(
+          // Important: Remove any padding from the ListView.
+          padding: EdgeInsets.zero,
+          children: <Widget>[
+            DrawerHeader(
+              decoration: BoxDecoration(
+                color: Colors.blue,
+              ),
+              child: Text(''),
+            ),
+            ListTile(
+              title: Text(''),
+              onTap: () {
+                // Update the state of the app.
+                // ...
+              },
+
+            ),
+            ListTile(
+              title: Text('İletişim'),
+              onTap: () {
+                // Update the state of the app.
+                // ...
+              },
+              leading: Icon(Icons.contact_support),
+
+            ),
+            ListTile(
+              title: Text('Hakkımızda'),
+              onTap: () {
+                Navigator.push(context, MaterialPageRoute (builder: (context) => Hakkinda()));
+              },
+              leading: Icon(Icons.account_box_outlined),
+            ),
+            ListTile(
+              title: Text('Çıkış'),
+              onTap: () {
+                 showAlertDialog(context);
+              },
+              leading: Icon(Icons.exit_to_app),
+            ),
+          ],
+        ),
+      ),
       appBar: AppBar(
         title: Row(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -108,22 +201,29 @@ class _HomeState extends State<Home> {
           ),
 
         ),
-      ),
+      )
     );
   }
 }
 class CategoryTile extends StatelessWidget {
 
-  final String imageUrl, categoryName;
-  CategoryTile({this.imageUrl, this.categoryName});
+  final String imageUrl, categoryName,text;
+  CategoryTile({this.imageUrl, this.categoryName, this.text,});
 
   @override
   Widget build(BuildContext context) {
+    var cName="";
+    if(categoryName.compareTo("İş")==1){
+      cName="business";
+    }else{
+      cName="entertainment";
+    }
+
     return GestureDetector(
       onTap: () {
         Navigator.push(context, MaterialPageRoute(
             builder: (context) => CategoryNews(
-              category: categoryName.toLowerCase(),
+              category: cName.toLowerCase(),
             )
         ));
 
@@ -172,7 +272,6 @@ class CategoryTile extends StatelessWidget {
 class  BlogTile extends StatelessWidget{
   final String  imageUrl, title, desc, url;
   BlogTile({@required this.imageUrl, this.title, this.desc,   @required this.url });
-
   @override
   Widget build (BuildContext context){
     return  GestureDetector(

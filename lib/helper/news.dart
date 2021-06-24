@@ -10,8 +10,8 @@ class News {
   var apiKey = '7c10ed865e574be4b4f851daf3ee9c6e';
 
   Future<void> getNews() async{
-    String url = "https://newsapi.org/v2/top-headlines?country=tr&category=business&apiKey=7c10ed865e574be4b4f851daf3ee9c6e";
-
+  //  String url = "https://newsapi.org/v2/top-headlines?country=tr&category=business&apiKey=7c10ed865e574be4b4f851daf3ee9c6e";
+    String url = "https://newsapi.org/v2/top-headlines?country=tr&apiKey=7c10ed865e574be4b4f851daf3ee9c6e";
 
     var response = await http.get(url);
 
